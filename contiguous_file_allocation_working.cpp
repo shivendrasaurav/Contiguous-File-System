@@ -31,19 +31,19 @@ int main(){
 		scanf("%s", FS[spc_fill_num].name);
 		printf("\nEnter Number Of Blocks: ");
 		scanf("%d", &FS[spc_fill_num].nof_blk);
-		recheck:
 		int spc_all = FS[spc_fill_num].nof_blk, cnt_spc = 0;
 		for(i=0; i<spc_all; i++){
 				if(FS[spc_fill_num + i].filled == 1){
 						spc_fill_num = spc_fill_num + i + 1;
-						printf("%d, ", spc_fill_num);
-						goto recheck;
+						cnt_spc = 0, i = 0;
 				}
 				else{
 						++cnt_spc;
+						printf("%d, ", cnt_spc);
 				}			
 		}
-		if(cnt_spc == FS[spc_fill_num].nof_blk){
+		printf("%d, ", FS[spc_fill_num].st_blk-1);
+		if(cnt_spc == FS[spc_fill_num].nof_blk - 1){
 			printf("\nFile Allocated From Block %d to Block %d", FS[spc_fill_num].st_blk, FS[spc_fill_num].st_blk+cnt_spc);
 			for(j=0; j<cnt_spc; j++){
 				FS[spc_fill_num + j].filled = 1;
